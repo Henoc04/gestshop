@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" 
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:form>
+	<h:outputLabel value="Nom: " />
+    <h:inputText value="#{fournisseurBean.fournisseur.name}" /><br/>
+    <h:outputLabel value="Adresse: " />
+    <h:inputText value="#{fournisseurBean.fournisseur.adresse}" /><br/>
+    <h:outputLabel value="Contact: " />
+    <h:inputText value="#{fournisseurBean.fournisseur.contact}" /><br/>
+    <h:commandButton value="Ajouter" action="#{fournisseurBean.addFournisseur()}" />
+</h:form>
+
+<br/>
+<br/>
+<br/>
+<h:dataTable value="#{fournisseurBean.fournisseurs}" var="item">
+    <h:column>
+    	<f:facet name="header">Code</f:facet>
+    		#{item.id}
+    </h:column> 
+    <h:column>
+    	<f:facet name="header">Nom</f:facet>
+    		#{item.name}
+    </h:column> 
+    <h:column>
+    	<f:facet name="header">Adresses</f:facet>
+   			#{item.adresse}
+   	</h:column> 
+    <h:column>
+    	<f:facet name="header">Contacts</f:facet>
+    		#{item.contact}
+    </h:column> 
+    <h:column>
+    	<h:commandButton value="Editer" action="#{fournisseurBean.editFournisseur()}" >
+        	<f:setPropertyActionListener target="#{fournisseurBean.fournisseur}" value="#{f}" />
+        </h:commandButton>
+    </h:column> 
+    <h:column> 
+        <h:commandButton value="Supprimer" action="#{fournisseurBean.deleteFournisseur(item.id)}" />
+    </h:column>
+</h:dataTable>
+
+</ui:composition>
